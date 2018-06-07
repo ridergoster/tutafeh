@@ -1,4 +1,4 @@
-package com.esgi.ridergoster.tutafeh.activity;
+package com.esgi.ridergoster.tutafeh.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -7,8 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.esgi.ridergoster.tutafeh.MyAdapter;
 import com.esgi.ridergoster.tutafeh.R;
+import com.esgi.ridergoster.tutafeh.adapters.MyAdapter;
+import com.esgi.ridergoster.tutafeh.models.Room;
 import com.esgi.ridergoster.tutafeh.services.SocketInstance;
 import com.esgi.ridergoster.tutafeh.services.TutafehEvents;
 
@@ -17,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import io.socket.emitter.Emitter;
 
@@ -25,28 +25,29 @@ public class RoomsActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter mAdapter;
 
-    private ArrayList<String> aRooms = new ArrayList<>();
+    private ArrayList<Room> aRooms = new ArrayList<>();
     private Emitter.Listener onRoomsUpdate = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
             try {
                 aRooms.clear();
 
-                JSONArray aJSONRooms = new JSONArray();
                 JSONArray rooms = (JSONArray) args[0];
 
                 for (int i = 0; i < rooms.length(); i++) {
-                    JSONObject room = rooms.getJSONObject(i);
+                    JSONObject oJsonRoom = rooms.getJSONObject(i);
+                    Room room = new Room();
 
-                    aJSONRooms.put(room);
-                    aRooms.add(room.getString("roomId"));
+                    room.setsRoomId(oJsonRoom.getString("roomId"));
+                    room.setsLang(oJsonRoom.getString("lang"));
+                    room.setiUsers(oJsonRoom.getInt("users"));
 
-                    Log.d("roomId", room.getString("roomId"));
-                    Log.d("lang", room.getString("lang"));
-                    Log.d("users", Integer.toString(room.getInt("users")));
+                    aRooms.add(room);
+
+                    Log.d("roomId", oJsonRoom.getString("roomId"));
+                    Log.d("lang", oJsonRoom.getString("lang"));
+                    Log.d("users", Integer.toString(oJsonRoom.getInt("users")));
                 }
-
-                Log.d("rooms", Arrays.toString(aRooms.toArray(new String[0])));
 
                 runOnUiThread(
                         new Runnable() {
@@ -77,15 +78,11 @@ public class RoomsActivity extends AppCompatActivity {
 
         RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
         mAdapter = new MyAdapter(aRooms);
         mRecyclerView.setAdapter(mAdapter);
     }

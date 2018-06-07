@@ -1,4 +1,4 @@
-package com.esgi.ridergoster.tutafeh.activity;
+package com.esgi.ridergoster.tutafeh.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,14 +14,12 @@ import com.esgi.ridergoster.tutafeh.services.SocketInstance;
 import com.esgi.ridergoster.tutafeh.services.TutafehEvents;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 public class MainActivity extends AppCompatActivity {
