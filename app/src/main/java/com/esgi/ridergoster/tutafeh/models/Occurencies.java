@@ -1,10 +1,11 @@
 package com.esgi.ridergoster.tutafeh.models;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import io.realm.RealmObject;
 
-public class Occurencies extends RealmObject {
+public class Occurencies extends RealmObject implements Comparator<Occurencies> {
     private String words;
     private String result;
     private String language;
@@ -73,5 +74,14 @@ public class Occurencies extends RealmObject {
                 ", createdat='" + createdat + '\'' +
                 ", updatedat='" + updatedat + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compare(Occurencies o1, Occurencies o2) {
+        if (o1.occurencies > o2.occurencies) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

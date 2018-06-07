@@ -15,6 +15,7 @@
         android:id="@+id/firstProposal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/messageText"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -22,6 +23,7 @@
         android:id="@+id/secondProposal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/messageText"
         app:layout_constraintEnd_toStartOf="@+id/thirdProposal"
         app:layout_constraintStart_toEndOf="@+id/firstProposal" />
@@ -29,6 +31,7 @@
     <Button
         android:id="@+id/thirdProposal"
         android:layout_width="wrap_content"
+        android:text=""
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/messageText"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -38,6 +41,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Type your message..."
+        android:inputType="textNoSuggestions"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button

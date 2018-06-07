@@ -69,6 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             intent.putExtra("username", ((Activity) v.getContext()).getIntent().getStringExtra("username"));
             intent.putExtra("roomId", mNameTextView.getText());
             intent.putExtra("users", mUsersTextView.getText());
+            intent.putExtra("lang", mLangTextView.getText());
 
             JSONObject data = new JSONObject();
 
